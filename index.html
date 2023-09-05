@@ -13,22 +13,30 @@
 <body>
     <div class="container">
         <h1>Test form</h1>
-        <form>
+        <form class="was-validated">
             <div class="form-group">
                 <label for="name">Név</label>
-                <input id="name" name="name" type="text" placeholder="Név">
+                <input id="name" name="name" type="text" placeholder="Név" class="form-control" required>
+                <div class="valid-feedback">Valid.</div>
+                <div class="invalid-feedback">Please fill out this field.</div>
             </div>
             <div class="form-group">
                 <label for="birthPlace">Születési hely</label>
-                <input id="birthPlace" name="birthPlace" type="text" placeholder="Születési dátum">
+                <input id="birthPlace" name="birthPlace" type="text" placeholder="Születési hely" class="form-control" required>
+                <div class="valid-feedback">Valid.</div>
+                <div class="invalid-feedback">Please fill out this field.</div>
             </div>
             <div class="form-group">
                 <label for="birthDate">Születési dátum</label>
-                <input type="date" name="birthDate" id="birthDate">
+                <input type="date" name="birthDate" id="birthDate" class="form-control" required>
+                <div class="valid-feedback">Valid.</div>
+                <div class="invalid-feedback">Please fill out this field.</div>
             </div>
             <div class="form-group">
                 <label for="favFood">Kedvenc étel</label>
-                <input type="text" name="favFood" id="favFood" placeholder="Kedvenc étel">
+                <input type="text" name="favFood" id="favFood" placeholder="Kedvenc étel" class="form-control" required>
+                <div class="valid-feedback">Valid.</div>
+                <div class="invalid-feedback">Please fill out this field.</div>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
