@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="">
+        <input type="text" name="ipAddress" id="ip">
+        <input type="button" value="Lekérés" onclick="temp()">
+    </form>
+    <p id="ipInfo"></p>
+    <script>
+        function temp(){
+            var ipAddress = document.getElementById('ip').value;
+            if (/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(ipAddress)) {  
+                var apiURL='http://ip-api.com/json/'+ipAddress;
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', apiURL, true);
+                xhr.onload = function(){
+                    if (xhr.status===200) {
+                        var ipInfo = JSON.parse(xhr.responseText);
+                        document.getElementById('ipInfo').textContent = "Az  ip országa:  "+ipInfo.country+", Városa: "+ipInfo.city+", Időzónája: "+ipInfo.timezone;
+                    }else{
+                        document.getElementById('ipInfo').textContent = 'Nem sikerült lekérni';
+                    }
+                }
+                xhr.send();
+            }else{
+                alert("Nem valid ip!")
+            }
+        }
+    </script>
+</body>
+</html>

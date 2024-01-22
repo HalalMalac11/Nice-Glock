@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        document.write("nigger <br>");
+        function doStuff() {
+            console.log("You're still a nigger")
+            var a = 23
+            var b = 3.14
+            var nev = "Liza"
+            var vane = true
+            //műveletek
+            var c = a + b
+            document.write(c + "<br>")
+
+            //tömb
+            var szamok = [1, 7, 22, 6]
+            var i
+            for (i = 0; i < szamok.length; i++) {
+                document.write(szamok[i] + " ")
+            }
+            document.write("<br>")
+            //tömbelemek összege
+            var sum = 0
+            for (i = 0; i < szamok.length; i++) {
+                sum = sum + szamok[i]
+            }
+            document.write(sum + "<br>")
+
+            //hány darab 3-al osztható páros szám van
+            var gutnum = 0
+            for (i = 0; i < szamok.length; i++) {
+                if (szamok[i] % 3 == 0 && szamok[i] % 2 == 0) {
+                    gutnum = gutnum + 1;
+                }
+            }
+            document.write(gutnum + "<br>")
+
+            //melyik a legnagyobb szám a tömbben
+            var max = 0
+            for (i = 0; i < szamok.length; i++) {
+                if (szamok[i] > max) {
+                    max = szamok[i]
+                }
+            }
+            document.write(max + "<br>")
+
+            var most = new Date()
+            document.write(most + "<br>")
+            
+            document.write(most.getMonth() + "<br>")
+            document.write(most.getDay() + "<br>")
+        }
+    </script>
+</head>
+
+<body>
+    <p>No rights?</p>
+    <img src="https://i.redd.it/t64r0ojslhv81.png" alt="" class="smol">
+    <br>
+    
+    <style>
+        .smol{
+            width: 80px;
+        }
+    </style>
+    <script>doStuff()</script>
+</body>
+
+</html>

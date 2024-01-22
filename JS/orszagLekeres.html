@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="">
+        <input type="text" name="country" id="country">
+        <input type="button" value="Lekérés" id="leker" >
+    </form>
+    <p id="ipInfo"></p>
+    <img id="zaszlo" hidden>
+    <script>
+        window.onload =document.getElementById('leker').addEventListener("click", function() {
+            var country = document.getElementById('country').value;
+                var apiURL='https://restcountries.com/v3.1/name/'+country;
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', apiURL, true);
+                xhr.onload = function(){
+                    if (xhr.status===200) {
+                        var countryInfo = JSON.parse(xhr.responseText);
+                        document.getElementById('ipInfo').innerHTML = "Az ország hivatalos neve: "+countryInfo[0].name.official+
+                        ", általános neve: "+countryInfo[0].name.common+
+                        "<br>népessége: "+countryInfo[0].population+
+                        "<br>pénzneme: "+Object.values(countryInfo[0].currencies)[0].name+" ("+Object.values(countryInfo[0].currencies)[0].symbol+") ";
+                        
+                        document.getElementById('zaszlo').setAttribute("src",countryInfo[0].flags.png)
+                        document.getElementById('zaszlo').removeAttribute("hidden");
+                    }else{
+                        document.getElementById('ipInfo').textContent = 'Nem sikerült lekérni';
+                    }
+                }
+                xhr.send();
+        });
+    </script>
+</body>
+</html>
