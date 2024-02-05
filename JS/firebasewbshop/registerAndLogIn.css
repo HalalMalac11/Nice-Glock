@@ -1,0 +1,25 @@
+#mainPanel{
+    width: 30%;
+    height: 30%;
+    display: block;
+    margin: auto;
+    margin-top: 20%;
+}
+h1{
+    font-family: 'Courier New', Courier, monospace;
+    color: #1e1eff;
+}
+form{
+    display: flex;
+    flex-direction: column;
+}
+#submit{
+    border: none;
+    height: 40px;
+    width: 120px;
+    margin: auto;
+    margin-top: 20px;
+}
+.formSection{
+    margin-bottom: 10px;
+}

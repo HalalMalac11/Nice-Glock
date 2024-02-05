@@ -1,0 +1,19 @@
+#mainPanel{
+    width: 30%;
+    height: 30%;
+    display: block;
+    margin: auto;
+    margin-top: 20%;
+    text-align: center;
+}
+h1{
+    font-family: 'Courier New', Courier, monospace;
+    color: #1e1eff;
+}
+.button{
+    border: none;
+    height: 40px;
+    width: 120px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
