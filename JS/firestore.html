@@ -10,18 +10,41 @@
 </head>
 <body>
     <div class="container">
-        <h1 class="h1 text-danger">Nagyon Firestore</h1>
-        <form action="">
-            <div class="mb-3 col-3">
-                <label for="nameIn" class="form-label">Name</label>
-                <input type="text" class="form-control" id="nameIn" name="nameIn" placeholder="Name">
-            </div>
-            <div class="mb-3 col-3">
-                <label for="messageIn" class="form-label">Message</label>
-                <input type="text" class="form-control" id="messageIn"  name="messageIn" placeholder="Message">
-            </div>
-            <button type="button" class="btn btn-primary" id="submit">Submit</button>
-        </form>
+        <div id="add">
+            <h1 class="h1 text-danger">Nagyon Firestore</h1>
+            <form action="">
+                <div class="mb-3 col-3">
+                    <label for="nameIn" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="nameIn" name="nameIn" placeholder="Name">
+                </div>
+                <div class="mb-3 col-3">
+                    <label for="messageIn" class="form-label">Message</label>
+                    <input type="text" class="form-control" id="messageIn"  name="messageIn" placeholder="Message">
+                </div>
+                <button type="button" class="btn btn-primary" id="submit">Submit</button>
+            </form>
+        </div>
+        <div id="editForm" hidden>
+            <h1 class="h1 text-primary">Szerkesztés</h1>
+            <form action="">
+                <div class="mb-3 col-3">
+                    <label for="ID" class="form-label">ID</label>
+                    <input type="text" class="form-control" id="ID" name="ID" placeholder="ID">
+                </div>
+                <div class="mb-3 col-3">
+                    <label for="nameEdit" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="nameEdit" name="nameEdit" placeholder="Name">
+                </div>
+                <div class="mb-3 col-3">
+                    <label for="messageIn" class="form-label">Message</label>
+                    <input type="text" class="form-control" id="messageEdit"  name="messageEdit" placeholder="Message">
+                </div>
+                <button type="button" class="btn btn-primary" id="submitEdit">Submit</button>
+            </form>
+        </div>
+        <div id="adatok">
+
+        </div>
     </div>
     <script src="https://www.gstatic.com/firebasejs/9.8.1/firebase-app-compat.js"></script>
         <script src="https://www.gstatic.com/firebasejs/9.8.1/firebase-firestore-compat.js"></script>
@@ -36,6 +59,7 @@
         };
         const app = firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore(app);
+        const dataDiv = document.getElementById("adatok");
         document.getElementById("submit").addEventListener("click", function(e){
             const nameIn = document.getElementById("nameIn").value;
             const messageIn = document.getElementById("messageIn").value;
@@ -45,7 +69,50 @@
                 message: messageIn
             })
         });
-        
+
+        db.collection("vendegkonyv").onSnapshot((querySnapshot) => {
+            const documents = querySnapshot.docs;
+            for (let i = 0; i < documents.length; i++) {
+
+                let newDiv = document.createElement("div");
+                newDiv.setAttribute("class","data");
+
+                let button = document.createElement("button");
+                button.setAttribute("class","editButton btn btn-secondary");
+                button.onclick=function(){
+                    document.getElementById("ID").value=documents[i].id;
+                    document.getElementById("nameEdit").value=documents[i].data().name;
+                    document.getElementById("messageEdit").value=documents[i].data().message;
+                    document.getElementById("editForm").removeAttribute("hidden");
+                };
+                button.appendChild(document.createTextNode("Szerkesztés"));
+
+                let newP =document.createElement("p");
+                newP.appendChild(document.createTextNode(documents[i].data().name+" "+documents[i].data().message))
+
+                newDiv.appendChild(newP);
+                newDiv.appendChild(button);
+
+                dataDiv.appendChild(newDiv);
+                dataDiv.appendChild(document.createElement("br"));
+            }
+        });
+        document.getElementById("submitEdit").addEventListener("click", function(e){
+            const docId = document.getElementById("ID").value;
+            const nameEdit = document.getElementById("nameEdit").value;
+            const messageEdit = document.getElementById("messageEdit").value;
+        if (docId) {
+                const docRef = db.collection("vendegkonyv").doc(docId);
+                docRef.update({
+                    name: nameEdit,
+                    message: messageEdit
+                }).then(() => {
+                    console.log("Document updated with ID: ", docRef.id)
+                }).catch(error => {
+                    console.error("Error updating document: ", error);
+                });
+            }
+        });
       </script>
 </body>
 </html>
